@@ -1,4 +1,5 @@
 <main class="album-view container narrow">
+    
      <section class="clearfix">
          <div class="column half">
              <img src="/assets/images/album_covers/01.png" class="album-cover-art">
@@ -9,6 +10,7 @@
              <h5 class="album-view-release-info">{{ album.albumData.year }} {{ album.albumData.label }}</h5>
          </div>
      </section>
+    
      <table class="album-view-song-list">
          <tr class="album-view-song-item" ng-repeat="songs in album.albumData.songs" ng-mouseover="hovered = true" ng-mouseleave="hovered = false">
              <td class="song-item-number">

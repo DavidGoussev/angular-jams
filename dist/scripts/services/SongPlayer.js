@@ -21,8 +21,7 @@
          */
         var setSong = function(song) {
             if (currentBuzzObject) {
-                currentBuzzObject.stop();
-                SongPlayer.currentSong.playing = null;
+                stopSong(song);
             }
 
             currentBuzzObject = new buzz.sound(song.audioUrl, {
@@ -42,6 +41,16 @@
         var playSong = function(song) {
             currentBuzzObject.play();
             song.playing = true;
+        };
+        
+        /**
+        * @function SongPlayer.stop
+        * @desc Private method stops currently playing song
+        * @param {Object} song
+        */
+        var stopSong = function(song) {
+            currentBuzzObject.stop();
+            SongPlayer.currentSong.playing = null;
         };
         
         /**
@@ -79,6 +88,7 @@
                 }
             }
         };
+        
 
         /**
         * @function SongPlayer.pause
@@ -99,12 +109,30 @@
         SongPlayer.previous = function() {
             var currentSongIndex = getSongIndex(SongPlayer.currentSong);
             currentSongIndex--;
+            var song = currentAlbum.songs[currentSongIndex];
             
             if (currentSongIndex < 0) {
-                currentBuzzObject.stop();
-                SongPlayer.currentSong.playing = null;
+                stopSong(song);
             } else {
-                var song = currentAlbum.songs[currentSongIndex];
+                
+                setSong(song);
+                playSong(song);
+            }
+        };
+        
+        /**
+        * @function SongPlayer.next
+        * @desc Public method click handler to access next song via index from songs array
+        * @param
+        */
+        SongPlayer.next = function() {
+            var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+            currentSongIndex++;
+            var song = currentAlbum.songs[currentSongIndex];
+            
+            if (currentSongIndex > currentAlbum.songs.length - 1) {
+                stopSong(song);
+            } else {
                 setSong(song);
                 playSong(song);
             }

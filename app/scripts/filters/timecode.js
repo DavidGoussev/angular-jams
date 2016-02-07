@@ -7,17 +7,9 @@
                 return '';
             }
             
-            var wholeSeconds = Math.floor(seconds);
-            var minutes = Math.floor(wholeSeconds / 60);
-            var remainingSeconds = wholeSeconds % 60;
-            
-            var output = minutes + ':';
-            
-            if (remainingSeconds < 10) {
-                output += '0';
-            }
-            
-            output += remainingSeconds;
+            //refactor timecode to use Buzz's built-in toTimer method
+            var output = buzz.toTimer(seconds);
+            // add 'true' as 2nd argument to view timer data as 00:00:00 long
             
             return output;
         };

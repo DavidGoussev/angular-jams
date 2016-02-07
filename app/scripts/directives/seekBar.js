@@ -61,6 +61,7 @@
                 * @desc Creates thumb on seekBar set to immediate css left of fill
                 * @param
                 */
+                
                 scope.thumbStyle = function() {
                     return {left: percentString()};
                 };

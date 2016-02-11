@@ -26,20 +26,21 @@
 
             currentBuzzObject = new buzz.sound(song.audioUrl, {
                 formats: ['mp3'],
-                preload: true
+                preload: true,
+                volume: 70
             });
             
-            currentBuzzObject.bind('timeupdate', function() {
+            currentBuzzObject.bind('timeupdate', SongPlayer.onTimeUpdate);/*function() {
                 $rootScope.$apply(function() {
                   SongPlayer.currentTime = currentBuzzObject.getTime();  
                 });
-            });
+            });*/
             
-            currentBuzzObject.bind('volumechange', function() {
-                $rootScope.$apply(function() {
-                    SongPlayer.volume = currentBuzzObject.getVolume();
-                });
-            });
+            currentBuzzObject.bind('volumechange', SongPlayer.onVolumeChange);
+//                $rootScope.$apply(function() {
+//                    SongPlayer.volume = currentBuzzObject.getVolume();
+//                });
+//            });
 
             SongPlayer.currentSong = song;
         };

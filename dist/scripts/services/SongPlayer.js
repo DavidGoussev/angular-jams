@@ -1,5 +1,5 @@
 (function() {
-    function SongPlayer($rootScope, Fixtures) {
+    function SongPlayer(Fixtures) {
         var SongPlayer = {};
 
         /**
@@ -41,6 +41,10 @@
 //                    SongPlayer.volume = currentBuzzObject.getVolume();
 //                });
 //            });
+            currentBuzzObject.bind('ended', function(e) {
+                SongPlayer.next();
+            });
+
 
             SongPlayer.currentSong = song;
         };
@@ -54,6 +58,7 @@
         var playSong = function(song) {
             currentBuzzObject.play();
             song.playing = true;
+            
         };
         
         /**
@@ -175,12 +180,14 @@
                 currentBuzzObject.setVolume(volume);
             }
         };
+        
+
 
         return SongPlayer;
     }
 
     angular
         .module('angularJams')
-        .factory('SongPlayer', ['$rootScope', 'Fixtures', SongPlayer]);
+        .factory('SongPlayer', ['Fixtures', SongPlayer]);
 
 })();

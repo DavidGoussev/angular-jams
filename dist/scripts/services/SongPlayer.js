@@ -41,6 +41,8 @@
 //                    SongPlayer.volume = currentBuzzObject.getVolume();
 //                });
 //            });
+            
+//            autoplay binding:
             currentBuzzObject.bind('ended', function(e) {
                 SongPlayer.next();
             });
@@ -125,6 +127,14 @@
             song = song || SongPlayer.currentSong;
             currentBuzzObject.pause();
             song.playing = false;
+        };
+        
+        SongPlayer.mute = function(song) {
+            song = song || SongPlayer.currentSong;
+            currentBuzzObject.toggleMute();
+            if (currentBuzzObject.isMuted()) {
+                song.muted = true;
+            } else {song.muted = false} 
         };
         
         /**
